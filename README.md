@@ -50,7 +50,7 @@ Step 3 : Install external dependencies
 
 Step 4 : Edit connection information
 
-	Go to the server.js file and edit the initializeConnectionInfo function to set the url to connect to your local JSON listener.
+Go to the server.js file and edit the initializeConnectionInfo function to set the url to connect to your local JSON listener.
 
 Step 5 : Run application
 
@@ -60,7 +60,7 @@ Step 5 : Run application
 
 Step 6: 
 
-	View the application in your web browser at http://localhost:80
+View the application in your web browser at http://localhost:80
 
 ###Option 2: Bluemix
 
