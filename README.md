@@ -4,11 +4,11 @@
 
 ##What does this sample application do?
 
-This application provides the building blocks for analyzing sensor data to detect problems, in time to prevent them.
+This Node.js application provides the building blocks for analyzing sensor data to detect problems, in time to prevent them.
 
 ##How does it work?
 
-The sensor sends readings to the Informix Database using the Mongo Driver. The application then retrieves the readings and notifies the web browser via web sockets (Socket.io). After recieving a notification from the application server, the web browser plots a realtime graph using Vis.js. Meanwhile, the application server will run analytics on the latest data and notify the user of the safety status!
+The sensor sends readings to the Informix Database using the Mongo Node.js Driver. The application then retrieves the readings and notifies the web browser via web sockets (Socket.io). After recieving a notification from the application server, the web browser plots a realtime graph using Vis.js. Meanwhile, the application server will run analytics on the latest data and notify the user of the safety status!
 
 ##What dependencies does it use?
 
@@ -33,6 +33,8 @@ The application relies on Express.js, Http, Socket.io, Mongodb, and Vis.js.
 ##How do I run this application?
 
 ###Option 1: Locally
+
+Prerequisite: IBM Informix database server and the IBM Informix wire listener configured and running 
 
 Step 1 : Install Node.js
 
