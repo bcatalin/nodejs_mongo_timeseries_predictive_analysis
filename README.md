@@ -48,9 +48,14 @@ Step 3 : Install external dependencies
   npm install
 ```
 
-Step 4 : Edit connection information
+Step 4 : Edit connection information in the server.js file
 
-Go to the server.js file and edit the initializeConnectionInfo function to set the url to connect to your local JSON listener.
+```
+	function initializeConnectionInfo(){
+		// For testing locally: set the url to your JSON listener here
+		url = "mongodb://localhost:27017/test";
+	}
+```
 
 Step 5 : Run application
 
@@ -58,9 +63,7 @@ Step 5 : Run application
   node server.js
 ```
 
-Step 6: 
-
-View the application in your web browser at http://localhost:80
+Step 6: View the application in your web browser at http://localhost:80
 
 ###Option 2: Bluemix
 
