@@ -45,17 +45,22 @@ Step 2 : Clone this project
 Step 3 : Install external dependencies
 
 ```
-  npm insatll
+  npm install
 ```
 
 Step 4 : Edit connection information
 
-* Go to the server.js file and edit the initializeConnectionInfo function to set the url to connect to your local JSON listener.
+	Go to the server.js file and edit the initializeConnectionInfo function to set the url to connect to your local JSON listener.
+
+Step 5 : Run application
 
 ```
-  npm insatll
+  node server.js
 ```
 
+Step 6: 
+
+	View the application in your web browser at http://localhost:80
 
 ###Option 2: Bluemix
 
