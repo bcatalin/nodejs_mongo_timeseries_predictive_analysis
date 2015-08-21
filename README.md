@@ -1,6 +1,6 @@
 
 
-# Predictive Analysis
+# TimeSeries Predictive Analysis
 
 ##What does this sample application do?
 
