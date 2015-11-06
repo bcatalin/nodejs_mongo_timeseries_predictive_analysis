@@ -22,10 +22,10 @@ function dbInit() {
 	 * This function resets and creates a timeseries database on Informix
 	 * Here is the procedure:
 	 * 1. Make sure there is no calendar with the name chosen
-	 * 2. Create a calendar using the system.timeseries.calendar document
-	 * 3. Make sure there is not a table thrmos_vti (main table that holds everything (sensor id, time, temp))
-	 * 4. Make sure there is not a table thermometers (table that holds id for sensors and time&temp row type)
-	 * 5. Make sure there is not a row named thermometer_reading (row type that holds timestamp and temp)
+	 * 2. Make sure there is not a table thrmos_vti (main table that holds everything (sensor id, time, temp))
+	 * 3. Make sure there is not a table thermometers (table that holds id for sensors and time&temp row type)
+	 * 4. Make sure there is not a row named thermometer_reading (row type that holds timestamp and temp)
+	 * 5. Create a calendar using the system.timeseries.calendar document
 	 * 6. Create a row type named thermometer_reading (holds timestamp and temp)
 	 * 7. Create a table named thermometers (holds which thermometer sent data and row type w time&temp)
 	 * 8. Create a virtual table named thrmos_vti based off of thermometers table (seperates time&temp rowtype to their own columns)
@@ -39,28 +39,11 @@ function dbInit() {
 				if (err){
 					return console.error("Calendar drop error: ", err.message);
 				}
-				createCalendar();
+				dropThermosvti();
 			});
 		});
 	}
 	
-	function createCalendar(){
-
-		db.collection("system.timeseries.calendar", function(err, coll){
-			
-			coll.insert({"name":"onesec", 
-				 "calendarStart":"2014-01-01 00:00:00",
-				 "patternStart":"2014-01-01 00:00:00",
-				 "pattern":{"type":"second", 
-				          "intervals":[{"duration":"1","on":"true" }]}}, function(err){
-				        	  if (err){
-				      			return console.error("Calendar creation error: ", err.message);
-				      		}
-				        	  dropThermosvti();
-				          });
-		});
-	}
-
 	function dropThermosvti(){
 		
 		db.dropCollection("thermos_vti", function(err){
@@ -70,7 +53,6 @@ function dbInit() {
 			dropThermometers();
 		});
 	}
-	
 
 	function dropThermometers(){
 		
@@ -92,9 +74,26 @@ function dbInit() {
 				if (err){
 					return console.error("Drop row type error: ", err.message);
 				}
-				createRowType();
+				createCalendar();
 			});
 			
+		});
+	}
+	
+	function createCalendar(){
+
+		db.collection("system.timeseries.calendar", function(err, coll){
+			
+			coll.insert({"name":"onesec", 
+				 "calendarStart":"2015-01-01 00:00:00",
+				 "patternStart":"2015-01-01 00:00:00",
+				 "pattern":{"type":"second", 
+				          "intervals":[{"duration":"1","on":"true" }]}}, function(err){
+				        	  if (err){
+				      			return console.error("Calendar creation error: ", err.message);
+				      		}
+				        	  createRowType();
+				          });
 		});
 	}
 
@@ -160,7 +159,7 @@ exports.pullData = function(socket){
 			if (err){
 				return console.error("Connecting to thermos_vti error: ", err.message);
 			}
-			coll.find({"thermometer_id": sensorID, "celsius": {"$exists": true}}).limit(1).sort({"tstamp_gmt": -1}).toArray(function(err, last){
+			coll.find({"thermometer_id": sensorID, "celsius": {"$exists": true}}).sort({"tstamp_gmt": -1}).limit(1).toArray(function(err, last){
 				if (err){
 					return console.error("Finding latest error: ", err.message);
 				}

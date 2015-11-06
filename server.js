@@ -25,15 +25,15 @@ app.use(express.static(__dirname + '/public'));
 io.sockets.on('connection', function(socket){
 	
 	socket.on('raiseTemp', function() {
-		sensor.generateFakeData(url, socket, .125);
+		sensor.simulateData(url, socket, .125);
 	});
 	
 	socket.on('holdTemp', function() {
-		sensor.generateFakeData(url, socket, 0);
+		sensor.simulateData(url, socket, 0);
 	});
 	
 	socket.on('lowerTemp', function() {
-		sensor.generateFakeData(url, socket, -.125);
+		sensor.simulateData(url, socket, -.125);
 	});
 	
 	socket.on('getData', function(){

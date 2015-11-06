@@ -13,7 +13,7 @@ var tempToSend = 2; // start at 2 celsius (apprx. 36F)
 var quadraticCounter = 1;
 var sensorID = 1; //specify the id of the sensor
 
-exports.generateFakeData = function(url, socket, delta) {
+exports.simulateData = function(url, socket, delta) {
 	//called every time a button is pressed
 	MongoClient.connect(url, function(err, db){
 			if (err){
